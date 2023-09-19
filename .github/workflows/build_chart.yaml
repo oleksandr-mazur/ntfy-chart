@@ -39,9 +39,10 @@ jobs:
           path: ${{env.PROJECT_NAME}}
 
       - name: install helm
-        uses: Azure/setup-helm@v1
+        uses: Azure/setup-helm@v3
         with:
           version: ${{ env.HELM_VERSION_TO_INSTALL }} # default is latest
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: build helm chart
         run: |
@@ -75,4 +76,4 @@ jobs:
           git commit -m "Added helm ${PROJECT_NAME}"
           git push origin gh-pages
         env:
-          token: ${{ github.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
