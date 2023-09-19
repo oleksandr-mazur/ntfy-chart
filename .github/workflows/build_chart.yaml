@@ -1,0 +1,76 @@
+name: Build image
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PROJECT_NAME: devops
+  CHART_PATH: devops/deploy/chart
+  HELM_VERSION_TO_INSTALL: 3.12.3
+  HELM_DIR_NAME: helm-repo
+  TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  OWNER: ${{ github.repository_owner }}
+  MY_TOKEN: ${{ secrets.TOKEN_GIT }}
+
+
+jobs:
+  build-helm:
+    runs-on: ubuntu-latest
+    permissions: write-all
+
+    steps:
+      - name: Checkout helm repo
+        uses: actions/checkout@v3
+        with:
+          repository: oleksandr-mazur/helm
+          ref: 'gh-pages'
+          path: ${{env.HELM_DIR_NAME}}
+          token: ${{ secrets.TOKEN_GIT }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+          path: ${{env.PROJECT_NAME}}
+
+      - name: install helm
+        uses: Azure/setup-helm@v1
+        with:
+          version: ${{ env.HELM_VERSION_TO_INSTALL }} # default is latest
+
+      - name: build helm chart
+        run: |
+          WORK_DIR=$(pwd)
+
+          # Test helm chart
+          cd chart && helm lint --strict --values values.yaml
+
+          helm package . -d ${WORK_DIR}/${HELM_DIR_NAME}
+
+          cd ${WORK_DIR}/${HELM_DIR_NAME}
+
+          helm repo index --url https://oleksandr-mazur.github.io/helm/ --merge index.yaml .
+
+      - name: Show gh-pages changes
+        run: |
+          cd ${HELM_DIR_NAME}
+          git status
+          git diff
+
+      - name: Commit report
+        run: |
+          cd ${HELM_DIR_NAME}
+          git config --global user.name 'Git action'
+          git config --global user.email 'gitaction@github.com'
+
+          git remote set-url origin https://${OWNER}:${token}@github.com/${OWNER}/helm.git
+
+          git add .
+          git commit -m "Added helm ${PROJECT_NAME}"
+          git push origin gh-pages
+        env:
+          token: ${{ secrets.TOKEN_GIT }}

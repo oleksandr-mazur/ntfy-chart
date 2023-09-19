@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ntfy.labels" . | nindent 4 }}
+data:
+  server.yml: |
+
+    log-level: {{ .Values.logLevel }}
+    log-format: {{ .Values.logFormat }}
+    log-file: /dev/stdout
+    base-url: https://{{ .Values.host }}
+
+    cache-file: /var/lib/ntfy/cache.db
+    cache-duration: "48h"
+
+    attachment-cache-dir: /var/lib/ntfy/attachment/
+    attachment-total-size-limit: "5G"
+    attachment-file-size-limit: "15M"
+    attachment-expiry-duration: "12h"
+
+    auth-file: /var/lib/ntfy/user.db
+    auth-default-access: deny-all
+
+    # Rate limiting: Total number of topics before the server rejects new topics.
+    global-topic-limit: 150
+
+    # Rate limiting: Number of subscriptions per visitor (IP address)
+    visitor-subscription-limit: 10
