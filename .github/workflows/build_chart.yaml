@@ -24,12 +24,13 @@ jobs:
 
     steps:
       - name: Checkout helm repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: oleksandr-mazur/helm
           ref: 'gh-pages'
           path: ${{env.HELM_DIR_NAME}}
-          token: ${{ secrets.TOKEN_GIT }}
+          # token: ${{ secrets.TOKEN_GIT }}
+          token: ${{ github.token }}
 
       - name: Checkout repository
         uses: actions/checkout@v3
