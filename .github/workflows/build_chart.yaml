@@ -14,7 +14,6 @@ env:
   HELM_DIR_NAME: helm-repo
   TOKEN: ${{ secrets.GITHUB_TOKEN }}
   OWNER: ${{ github.repository_owner }}
-  MY_TOKEN: ${{ secrets.TOKEN_GIT }}
 
 
 jobs:
