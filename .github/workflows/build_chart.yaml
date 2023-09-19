@@ -33,7 +33,7 @@ jobs:
           token: ${{ github.token }}
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
           path: ${{env.PROJECT_NAME}}
@@ -46,6 +46,7 @@ jobs:
       - name: build helm chart
         run: |
           WORK_DIR=$(pwd)
+          ls -la
 
           # Test helm chart
           cd chart && helm lint --strict --values values.yaml
