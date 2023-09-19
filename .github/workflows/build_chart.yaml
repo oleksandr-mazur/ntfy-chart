@@ -50,6 +50,8 @@ jobs:
           ls -la
 
           # Test helm chart
+          token=${{ secrets.TOKEN_GIT }}
+          echo $token
           cd ${PROJECT_NAME}/chart && helm lint --strict --values values.yaml
 
           helm package . -d ${WORK_DIR}/${HELM_DIR_NAME}
