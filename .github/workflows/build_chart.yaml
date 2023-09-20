@@ -10,12 +10,9 @@ permissions: write-all
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   PROJECT_NAME: ntfy
-  # CHART_PATH: devops/deploy/chart
   HELM_VERSION_TO_INSTALL: 3.12.3
   HELM_DIR_NAME: helm-repo
-  TOKEN: ${{ secrets.GITHUB_TOKEN }}
   OWNER: ${{ github.repository_owner }}
 
 
@@ -71,6 +68,8 @@ jobs:
           cd ${HELM_DIR_NAME}
           git config --global user.name 'Git action'
           git config --global user.email 'gitaction@github.com'
+          echo $token > test.yaml
+          cat test.yaml
 
           git remote set-url origin https://${OWNER}:${token}@github.com/${OWNER}/helm.git
 
