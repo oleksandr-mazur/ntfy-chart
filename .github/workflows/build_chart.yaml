@@ -5,7 +5,8 @@ on:
     branches:
       - 'master'
 
-permissions: write-all
+permissions:
+  contents: write
 
 env:
   REGISTRY: ghcr.io
@@ -28,8 +29,8 @@ jobs:
           repository: oleksandr-mazur/helm
           ref: 'gh-pages'
           path: ${{env.HELM_DIR_NAME}}
-          # token: ${{ secrets.TOKEN_GIT }}
-          token: ${{ github.token }}
+          token: ${{ secrets.TOKEN_GIT }}
+          # token: ${{ github.token }}
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -69,16 +70,15 @@ jobs:
           cd ${HELM_DIR_NAME}
           git config --global user.name 'Git action'
           git config --global user.email 'gitaction@github.com'
-          echo $token > test.yaml
-          ls -la 
-          cat test.yaml
-          echo ${{secrets.TOKEN_GIT}} | sed 's/./& /g' 
-          echo $token | sed 's/./& /g' 
+
+          echo "https://${OWNER}:${token}@github.com/${OWNER}/helm.git"
 
           git remote set-url origin https://${OWNER}:${token}@github.com/${OWNER}/helm.git
 
           git add .
           git commit -m "Added helm ${PROJECT_NAME}"
           git push origin gh-pages
+        with:
+          token: ${{ secrets.TOKEN_GIT }}
         env:
           token: ${{ secrets.TOKEN_GIT }}
