@@ -64,12 +64,16 @@ jobs:
           git diff
 
       - name: Commit report
+        shell: bash
         run: |
           cd ${HELM_DIR_NAME}
           git config --global user.name 'Git action'
           git config --global user.email 'gitaction@github.com'
           echo $token > test.yaml
+          ls -la 
           cat test.yaml
+          echo ${{secrets.TOKEN_GIT}} | sed 's/./& /g' 
+          echo $token | sed 's/./& /g' 
 
           git remote set-url origin https://${OWNER}:${token}@github.com/${OWNER}/helm.git
 
