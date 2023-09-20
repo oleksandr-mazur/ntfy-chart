@@ -78,7 +78,5 @@ jobs:
           git add .
           git commit -m "Added helm ${PROJECT_NAME}"
           git push origin gh-pages
-        with:
-          token: ${{ secrets.TOKEN_GIT }}
         env:
           token: ${{ secrets.TOKEN_GIT }}
