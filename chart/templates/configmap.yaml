@@ -13,19 +13,22 @@ data:
     log-file: /dev/stdout
     base-url: https://{{ .Values.host }}
 
-    cache-file: /var/lib/ntfy/cache.db
-    cache-duration: "48h"
+    cache-file: {{ .Values.cacheFile }}
+    cache-duration: "{{ .Values.cacheDuration }}"
 
-    attachment-cache-dir: /var/lib/ntfy/attachment/
-    attachment-total-size-limit: "5G"
-    attachment-file-size-limit: "15M"
-    attachment-expiry-duration: "12h"
+    attachment-cache-dir: {{ .Values.attachmentCacheDir }}
+    attachment-total-size-limit: "{{ .Values.attachmentTotalSizeLimit }}"
+    attachment-file-size-limit: "{{ .Values.attachmentFileSizeLimit }}"
+    attachment-expiry-duration: "{{ .Values.attachmentExpiryDuration }}"
 
-    auth-file: /var/lib/ntfy/user.db
-    auth-default-access: deny-all
+    auth-file: {{ .Values.authFile }}
+    auth-default-access: {{ .Values.authDefaultAccess }}
 
-    # Rate limiting: Total number of topics before the server rejects new topics.
-    global-topic-limit: 150
+    global-topic-limit: {{ .Values.globalTopicLimit }}
+    visitor-subscription-limit: {{ .Values.visitorSubscriptionLimit }}
+    visitor-request-limit-burst: {{ .Values.visitorRequestLimitBurst }}
+    visitor-request-limit-replenish: "{{ .Values.visitorRequestLimitReplenish }}"
+    visitor-request-limit-exempt-hosts: {{ .Values.visitorRequestLimitExemptHosts }}
+    visitor-message-daily-limit: {{ .Values.visitorMessageDailyLimit }}
 
-    # Rate limiting: Number of subscriptions per visitor (IP address)
-    visitor-subscription-limit: 10
+    behind-proxy: {{ .Values.behindProxy }}

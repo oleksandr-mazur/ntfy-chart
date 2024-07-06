@@ -8,7 +8,7 @@ image:
   repository: binwiederhier/ntfy
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v2.7.0"
+  tag: "v2.11.0"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -87,3 +87,27 @@ host: ""
 
 logLevel: info
 logFormat: json
+
+attachmentCacheDir: /var/lib/ntfy/attachment/
+attachmentTotalSizeLimit: "5G"
+attachmentFileSizeLimit: "15M"
+attachmentExpiryDuration: "72h"
+
+cacheFile: /var/lib/ntfy/cache.db
+cacheDuration: "48h"
+
+authFile: /var/lib/ntfy/user.db
+authDefaultAccess: deny-all
+
+behindProxy: true
+# Rate limiting: Total number of topics before the server rejects new topics.
+globalTopicLimit: 50
+# Rate limiting: Number of subscriptions per visitor (IP address)
+visitorSubscriptionLimit: 15
+# Initial bucket of requests each visitor has. This defaults to 60.
+visitorRequestLimitBurst: 60
+# Rate at which the bucket is refilled (one request per x). Defaults to 5s.
+visitorRequestLimitReplenish: 5s
+# Comma-separated list of hostnames and IPs to be exempt from request rate limiting; hostnames are resolved at the time the server is started. Defaults to an empty list.
+visitorRequestLimitExemptHosts: []
+visitorMessageDailyLimit: 1000
