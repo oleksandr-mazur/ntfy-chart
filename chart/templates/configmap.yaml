@@ -28,7 +28,7 @@ data:
     visitor-subscription-limit: {{ .Values.visitorSubscriptionLimit }}
     visitor-request-limit-burst: {{ .Values.visitorRequestLimitBurst }}
     visitor-request-limit-replenish: "{{ .Values.visitorRequestLimitReplenish }}"
-    visitor-request-limit-exempt-hosts: {{ .Values.visitorRequestLimitExemptHosts }}
+    visitor-request-limit-exempt-hosts: "{{ .Values.visitorRequestLimitExemptHosts }}"
     visitor-message-daily-limit: {{ .Values.visitorMessageDailyLimit }}
 
     behind-proxy: {{ .Values.behindProxy }}

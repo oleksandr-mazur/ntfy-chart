@@ -109,5 +109,5 @@ visitorRequestLimitBurst: 60
 # Rate at which the bucket is refilled (one request per x). Defaults to 5s.
 visitorRequestLimitReplenish: 5s
 # Comma-separated list of hostnames and IPs to be exempt from request rate limiting; hostnames are resolved at the time the server is started. Defaults to an empty list.
-visitorRequestLimitExemptHosts: []
+visitorRequestLimitExemptHosts: ""
 visitorMessageDailyLimit: 1000
