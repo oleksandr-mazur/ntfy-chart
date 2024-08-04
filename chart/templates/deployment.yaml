@@ -40,6 +40,9 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
+            - name: monitor
+              containerPort: 9090
+              protocol: TCP
           livenessProbe:
             httpGet:
               path: /v1/health

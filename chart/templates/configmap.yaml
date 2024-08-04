@@ -32,3 +32,8 @@ data:
     visitor-message-daily-limit: {{ .Values.visitorMessageDailyLimit }}
 
     behind-proxy: {{ .Values.behindProxy }}
+
+    {{- if .Values.metrics.enabled }}
+    enable-metrics: true
+    metrics-listen-http: ":9090"
+    {{- end }}

@@ -111,3 +111,31 @@ visitorRequestLimitReplenish: 5s
 # Comma-separated list of hostnames and IPs to be exempt from request rate limiting; hostnames are resolved at the time the server is started. Defaults to an empty list.
 visitorRequestLimitExemptHosts: ""
 visitorMessageDailyLimit: 1000
+
+# Grafana dashboard https://raw.githubusercontent.com/binwiederhier/ntfy/main/examples/grafana-dashboard/ntfy-grafana.json
+metrics:
+  port: 10254
+  portName: metrics
+  enabled: true
+  service:
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "10254"
+      # prometheus.io/port: '{{ .Values.metrics.service.port }}'
+    labels: {}
+    # servicePort: 10254
+    type: ClusterIP
+  serviceMonitor:
+    enabled: true
+    additionalLabels: {}
+    annotations: {}
+    ## The label to use to retrieve the job name from.
+    ## jobLabel: "app.kubernetes.io/name"
+    namespace: ""
+    namespaceSelector: {}
+    scrapeInterval: 30s
+    # honorLabels: true
+    targetLabels: []
+    relabelings: []
+    metricRelabelings: []
+
