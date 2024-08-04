@@ -21,9 +21,10 @@ spec:
   selector:
     {{- include "ntfy.selectorLabels" . | nindent 4 }}
 {{- end }}
+
 ---
 
-{{- if and .Values.metrics.enabled .Values.metrics.serviceMonitor.enabled -}}
+{{- if and .Values.metrics.enabled .Values.metrics.serviceMonitor.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:

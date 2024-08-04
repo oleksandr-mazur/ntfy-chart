@@ -12,7 +12,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   PROJECT_NAME: ntfy
-  HELM_VERSION_TO_INSTALL: 3.12.3
+  HELM_VERSION_TO_INSTALL: 3.15.3
   HELM_DIR_NAME: helm-repo
   OWNER: ${{ github.repository_owner }}
 
