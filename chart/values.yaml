@@ -112,6 +112,19 @@ visitorRequestLimitReplenish: 5s
 visitorRequestLimitExemptHosts: ""
 visitorMessageDailyLimit: 1000
 
+# Web Push: Private Key. Run ntfy webpush keys to generate
+webPushPrivateKey:
+# Web Push: Database file that stores subscriptions
+webPushFile:
+# Web Push: Sender email address
+webPushEmailAddress:
+# Web Push: SQL queries to run against subscription database at startup
+webPushStartupQueries:
+# Web Push: Duration after which a subscription is considered stale and will be deleted. This is to prevent stale subscriptions.
+webPushExpiryDuration: "60d"
+# Web Push: Duration after which a warning is sent to subscribers that their subscription will expire soon. This is to prevent stale subscriptions.
+webPushExpiryWarningDuration: "55d"
+
 # Grafana dashboard https://raw.githubusercontent.com/binwiederhier/ntfy/main/examples/grafana-dashboard/ntfy-grafana.json
 metrics:
   port: 10254

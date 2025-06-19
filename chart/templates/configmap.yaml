@@ -31,6 +31,21 @@ data:
     visitor-request-limit-exempt-hosts: "{{ .Values.visitorRequestLimitExemptHosts }}"
     visitor-message-daily-limit: {{ .Values.visitorMessageDailyLimit }}
 
+    {{ if .Values.webPushPrivateKey -}}
+    web-push-private-key: {{ .Values.webPushPrivateKey }}
+    {{ end -}}
+    {{ if .Values.webPushFile -}}
+    web-push-file: {{ .Values.webPushFile }}
+    {{ end -}}
+    {{ if .Values.webPushEmailAddress -}}
+    web-push-email-address: {{ .Values.webPushEmailAddress }}
+    {{ end -}}
+    {{ if .Values.webPushStartupQueries -}}
+    web-push-startup-queries: {{ .Values.webPushStartupQueries }}
+    {{ end -}}
+    web-push-expiry-duration: {{ .Values.webPushExpiryDuration }}
+    web-push-expiry-warning-duration: {{ .Values.webPushExpiryWarningDuration }}
+
     behind-proxy: {{ .Values.behindProxy }}
 
     {{- if .Values.metrics.enabled }}
