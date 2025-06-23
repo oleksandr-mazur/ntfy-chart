@@ -31,6 +31,9 @@ data:
     visitor-request-limit-exempt-hosts: "{{ .Values.visitorRequestLimitExemptHosts }}"
     visitor-message-daily-limit: {{ .Values.visitorMessageDailyLimit }}
 
+    {{ if .Values.webPushPublicKey -}}
+    web-push-public-key: {{ .Values.webPushPublicKey }}
+    {{ end -}}
     {{ if .Values.webPushPrivateKey -}}
     web-push-private-key: {{ .Values.webPushPrivateKey }}
     {{ end -}}

@@ -112,6 +112,8 @@ visitorRequestLimitReplenish: 5s
 visitorRequestLimitExemptHosts: ""
 visitorMessageDailyLimit: 1000
 
+# Web Push: Public Key. Run ntfy webpush keys to generate
+webPushPublicKey:
 # Web Push: Private Key. Run ntfy webpush keys to generate
 webPushPrivateKey:
 # Web Push: Database file that stores subscriptions
